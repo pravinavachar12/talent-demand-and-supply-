@@ -65,7 +65,10 @@ function Dashboard() {
     };
 
     axios
-      .get("http://localhost:5000/api/employees", config)
+      .get(
+        "https://talent-demand-and-supply.onrender.com//api/employees",
+        config,
+      )
       .then((res) => setEmployees(res.data))
       .catch((err) => {
         console.log("Auth Error:", err);

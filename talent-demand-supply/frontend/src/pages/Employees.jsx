@@ -20,22 +20,28 @@ function Employees() {
 
   const fetchEmployees = async () => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    const res = await axios.get("http://localhost:5000/api/employees", {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
+    const res = await axios.get(
+      "https://talent-demand-and-supply.onrender.com//api/employees",
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
       },
-    });
+    );
     setEmployees(res.data);
   };
 
   const deleteEmployee = async (id) => {
     if (window.confirm("Are you sure you want to remove this talent?")) {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-      await axios.delete(`http://localhost:5000/api/employees/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
+      await axios.delete(
+        `https://talent-demand-and-supply.onrender.com//api/employees/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
         },
-      });
+      );
       fetchEmployees();
     }
   };

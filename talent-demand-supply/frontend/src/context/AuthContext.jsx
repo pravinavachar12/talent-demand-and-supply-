@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   // 1. Check if a user is already logged in when the app starts
   useEffect(() => {
-    const savedUser = localStorage.getItem('userInfo');
+    const savedUser = localStorage.getItem("userInfo");
     if (savedUser) {
       setUser(JSON.parse(savedUser));
     }
@@ -19,30 +19,42 @@ export const AuthProvider = ({ children }) => {
   // 2. Login Function
   const login = async (email, password) => {
     try {
-      const { data } = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const { data } = await axios.post(
+        "https://talent-demand-and-supply.onrender.com//api/auth/login",
+        { email, password },
+      );
       setUser(data);
-      localStorage.setItem('userInfo', JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(data));
       return { success: true };
     } catch (error) {
-      return { success: false, message: error.response?.data?.message || 'Login Failed' };
+      return {
+        success: false,
+        message: error.response?.data?.message || "Login Failed",
+      };
     }
   };
 
   // 3. Register Function
   const register = async (name, email, password, role) => {
     try {
-      const { data } = await axios.post('http://localhost:5000/api/auth/register', { name, email, password, role });
+      const { data } = await axios.post(
+        "https://talent-demand-and-supply.onrender.com//api/auth/register",
+        { name, email, password, role },
+      );
       setUser(data);
-      localStorage.setItem('userInfo', JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(data));
       return { success: true };
     } catch (error) {
-      return { success: false, message: error.response?.data?.message || 'Registration Failed' };
+      return {
+        success: false,
+        message: error.response?.data?.message || "Registration Failed",
+      };
     }
   };
 
   // 4. Logout Function
   const logout = () => {
-    localStorage.removeItem('userInfo');
+    localStorage.removeItem("userInfo");
     setUser(null);
   };
 
