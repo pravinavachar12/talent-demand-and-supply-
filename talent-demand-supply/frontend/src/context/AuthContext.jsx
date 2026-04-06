@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const { data } = await axios.post(
-        "https://talent-demand-and-supply.onrender.com//api/auth/login",
+        "https://talent-demand-and-supply.onrender.com/api/auth/login",
         { email, password },
       );
       setUser(data);
